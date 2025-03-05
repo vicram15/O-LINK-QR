@@ -4,7 +4,7 @@
 **Commit Description:**  
 Implemented offline QR-based transactions with Web3 integration, enabling seamless payments. Added offline transaction storage and sync mechanism, ensuring secure UPI payments with blockchain-backed records.
 
-**Working Demo**: YT_link to be uploaded
+**Working Demo**:  https://youtu.be/cilXdCGEF_w?si=1HEy1Z6lNCLQu1MZ
 
 # Working
 This project addresses failed transactions due to network coverage issues by enabling offline transactions through QR codes. Users can preload funds into a digital wallet, allowing transactions to be recorded even without an internet connection. Once the network is restored, the system syncs transactions to the server. Web3 integration ensures secure UPI payments, and all transactions are stored on a public blockchain for transparency and data integrity.
