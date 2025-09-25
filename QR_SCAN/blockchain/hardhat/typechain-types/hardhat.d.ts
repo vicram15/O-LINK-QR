@@ -106,10 +106,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.AppForwarder__factory>;
     getContractFactory(
-      name: "ProfileSBT",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ProfileSBT__factory>;
-    getContractFactory(
       name: "Recipient",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Recipient__factory>;
@@ -230,11 +226,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.AppForwarder>;
     getContractAt(
-      name: "ProfileSBT",
-      address: string | ethers.Addressable,
-      signer?: ethers.Signer
-    ): Promise<Contracts.ProfileSBT>;
-    getContractAt(
       name: "Recipient",
       address: string | ethers.Addressable,
       signer?: ethers.Signer
@@ -332,10 +323,6 @@ declare module "hardhat/types/runtime" {
       name: "AppForwarder",
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AppForwarder>;
-    deployContract(
-      name: "ProfileSBT",
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.ProfileSBT>;
     deployContract(
       name: "Recipient",
       signerOrOptions?: ethers.Signer | DeployContractOptions
@@ -456,11 +443,6 @@ declare module "hardhat/types/runtime" {
       args: any[],
       signerOrOptions?: ethers.Signer | DeployContractOptions
     ): Promise<Contracts.AppForwarder>;
-    deployContract(
-      name: "ProfileSBT",
-      args: any[],
-      signerOrOptions?: ethers.Signer | DeployContractOptions
-    ): Promise<Contracts.ProfileSBT>;
     deployContract(
       name: "Recipient",
       args: any[],

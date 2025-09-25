@@ -1,6 +1,6 @@
 import { ethers } from "hardhat";
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 
 async function main() {
   console.log("Deploying contracts...");
@@ -35,9 +35,9 @@ async function main() {
   };
 
   // Ensure directories exist
-  const webDir = path.join(__dirname, "../../src");
-  const chainDir = path.join(webDir, "chain");
-  const abiDir = path.join(chainDir, "abi");
+  const webDir = path.resolve(__dirname, "../../src");
+  const chainDir = path.resolve(webDir, "chain");
+  const abiDir = path.resolve(chainDir, "abi");
   
   if (!fs.existsSync(chainDir)) {
     fs.mkdirSync(chainDir, { recursive: true });
@@ -47,38 +47,38 @@ async function main() {
   }
 
   // Write addresses.json
-  const addressesPath = path.join(chainDir, "addresses.json");
+  const addressesPath = path.resolve(chainDir, "addresses.json");
   fs.writeFileSync(addressesPath, JSON.stringify(addresses, null, 2));
   console.log("Addresses written to:", addressesPath);
 
   // Copy ABI files
-  const artifactsDir = path.join(__dirname, "../artifacts/contracts");
+  const artifactsDir = path.resolve(__dirname, "../artifacts/contracts");
   
   // Copy Recipient ABI
   const recipientArtifact = JSON.parse(
     fs.readFileSync(
-      path.join(artifactsDir, "Recipient.sol/Recipient.json"),
+      path.resolve(artifactsDir, "Recipient.sol/Recipient.json"),
       "utf8"
     )
   );
   fs.writeFileSync(
-    path.join(abiDir, "Recipient.json"),
+    path.resolve(abiDir, "Recipient.json"),
     JSON.stringify(recipientArtifact.abi, null, 2)
   );
-  console.log("Recipient ABI copied to:", path.join(abiDir, "Recipient.json"));
+  console.log("Recipient ABI copied to:", path.resolve(abiDir, "Recipient.json"));
 
   // Copy AppForwarder ABI
   const forwarderArtifact = JSON.parse(
     fs.readFileSync(
-      path.join(artifactsDir, "AppForwarder.sol/AppForwarder.json"),
+      path.resolve(artifactsDir, "AppForwarder.sol/AppForwarder.json"),
       "utf8"
     )
   );
   fs.writeFileSync(
-    path.join(abiDir, "AppForwarder.json"),
+    path.resolve(abiDir, "AppForwarder.json"),
     JSON.stringify(forwarderArtifact.abi, null, 2)
   );
-  console.log("AppForwarder ABI copied to:", path.join(abiDir, "AppForwarder.json"));
+  console.log("AppForwarder ABI copied to:", path.resolve(abiDir, "AppForwarder.json"));
 
 
   console.log("\nDeployment completed successfully!");

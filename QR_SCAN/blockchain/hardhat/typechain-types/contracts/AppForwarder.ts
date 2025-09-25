@@ -59,8 +59,10 @@ export interface AppForwarderInterface extends Interface {
       | "eip712Domain"
       | "execute"
       | "executeBatch"
+      | "name"
       | "nonces"
       | "verify"
+      | "version"
   ): FunctionFragment;
 
   getEvent(
@@ -79,11 +81,13 @@ export interface AppForwarderInterface extends Interface {
     functionFragment: "executeBatch",
     values: [ERC2771Forwarder.ForwardRequestDataStruct[], AddressLike]
   ): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
   encodeFunctionData(functionFragment: "nonces", values: [AddressLike]): string;
   encodeFunctionData(
     functionFragment: "verify",
     values: [ERC2771Forwarder.ForwardRequestDataStruct]
   ): string;
+  encodeFunctionData(functionFragment: "version", values?: undefined): string;
 
   decodeFunctionResult(
     functionFragment: "eip712Domain",
@@ -94,8 +98,10 @@ export interface AppForwarderInterface extends Interface {
     functionFragment: "executeBatch",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "nonces", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "verify", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "version", data: BytesLike): Result;
 }
 
 export namespace EIP712DomainChangedEvent {
@@ -200,6 +206,8 @@ export interface AppForwarder extends BaseContract {
     "payable"
   >;
 
+  name: TypedContractMethod<[], [string], "view">;
+
   nonces: TypedContractMethod<[owner: AddressLike], [bigint], "view">;
 
   verify: TypedContractMethod<
@@ -207,6 +215,8 @@ export interface AppForwarder extends BaseContract {
     [boolean],
     "view"
   >;
+
+  version: TypedContractMethod<[], [string], "view">;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
@@ -247,6 +257,9 @@ export interface AppForwarder extends BaseContract {
     "payable"
   >;
   getFunction(
+    nameOrSignature: "name"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "nonces"
   ): TypedContractMethod<[owner: AddressLike], [bigint], "view">;
   getFunction(
@@ -256,6 +269,9 @@ export interface AppForwarder extends BaseContract {
     [boolean],
     "view"
   >;
+  getFunction(
+    nameOrSignature: "version"
+  ): TypedContractMethod<[], [string], "view">;
 
   getEvent(
     key: "EIP712DomainChanged"

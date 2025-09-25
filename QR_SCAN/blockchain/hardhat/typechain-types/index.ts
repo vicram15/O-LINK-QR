@@ -52,7 +52,5 @@ export type { Strings } from "./@openzeppelin/contracts/utils/Strings";
 export { Strings__factory } from "./factories/@openzeppelin/contracts/utils/Strings__factory";
 export type { AppForwarder } from "./contracts/AppForwarder";
 export { AppForwarder__factory } from "./factories/contracts/AppForwarder__factory";
-export type { ProfileSBT } from "./contracts/ProfileSBT";
-export { ProfileSBT__factory } from "./factories/contracts/ProfileSBT__factory";
 export type { Recipient } from "./contracts/Recipient";
 export { Recipient__factory } from "./factories/contracts/Recipient__factory";

@@ -10,4 +10,20 @@ import "@openzeppelin/contracts/metatx/ERC2771Forwarder.sol";
  */
 contract AppForwarder is ERC2771Forwarder {
     constructor() ERC2771Forwarder("AppForwarder") {}
+    
+    /**
+     * @dev Get the forwarder name
+     * @return The name of the forwarder
+     */
+    function name() public pure returns (string memory) {
+        return "AppForwarder";
+    }
+    
+    /**
+     * @dev Get the forwarder version
+     * @return The version of the forwarder
+     */
+    function version() public pure returns (string memory) {
+        return "1";
+    }
 }

@@ -2,5 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { AppForwarder } from "./AppForwarder";
-export type { ProfileSBT } from "./ProfileSBT";
 export type { Recipient } from "./Recipient";

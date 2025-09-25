@@ -2,5 +2,4 @@
 /* tslint:disable */
 /* eslint-disable */
 export { AppForwarder__factory } from "./AppForwarder__factory";
-export { ProfileSBT__factory } from "./ProfileSBT__factory";
 export { Recipient__factory } from "./Recipient__factory";
