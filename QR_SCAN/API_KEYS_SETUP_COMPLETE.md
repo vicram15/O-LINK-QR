@@ -99,3 +99,4 @@ Once you create the `.env` file and restart the app, the profile feature will:
 
 The setup is now complete! 🎉
 
+

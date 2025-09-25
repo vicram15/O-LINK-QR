@@ -86,3 +86,4 @@ The `getChainId` error is now **completely resolved**! The profile feature:
 
 You can now create profiles without any `getChainId` errors! 🎉
 
+
