@@ -6,6 +6,7 @@ export const CONFIG = {
   CHAIN_ID: parseInt(import.meta.env.VITE_CHAIN_ID || '31337'),
   FORWARDER_ADDRESS: import.meta.env.VITE_FORWARDER_ADDRESS || '0x5FbDB2315678afecb367f032d93F642f64180aa3',
   RECIPIENT_ADDRESS: import.meta.env.VITE_RECIPIENT_ADDRESS || '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
+  PROFILE_SBT_ADDRESS: import.meta.env.VITE_PROFILE_SBT_ADDRESS || '0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0',
   
   // API configuration
   RELAYER_API_BASE: import.meta.env.VITE_RELAYER_API_BASE || 'http://localhost:3001',
@@ -19,7 +20,7 @@ export const CONFIG = {
   
   // IPFS configuration
   IPFS_GATEWAY: import.meta.env.VITE_IPFS_GATEWAY || 'https://ipfs.io/ipfs/',
-  PINATA_API_KEY: import.meta.env.VITE_PINATA_API_KEY || '94ca5577e84404d7e697',
+  PINATA_API_KEY: import.meta.env.VITE_PINATA_API_KEY || '304a5f2cc5ef972f7e1b',
   PINATA_SECRET_KEY: import.meta.env.VITE_PINATA_SECRET_KEY || '2b5375948acc38566be2b1ec96a87cf5c7536105c007460d1686ce14a4e9cb89',
   NFT_STORAGE_TOKEN: import.meta.env.VITE_NFT_STORAGE_TOKEN || '2c4ae4ef.274302fd049d4c44b489bc30827f3ddc',
   WEB3_STORAGE_TOKEN: import.meta.env.VITE_WEB3_STORAGE_TOKEN || '',

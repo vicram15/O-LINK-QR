@@ -18,22 +18,16 @@
 - **RelayScan Integration**: Triggers event when payment is processed
 - **Generate Page Listener**: Listens for payment completion events
 
-### 4. **Demo Functionality**
-- **Simulate Button**: "Simulate Payment Received" button for testing
-- **Mock Data**: Generates realistic payment data for demonstration
-- **Toast Notifications**: Shows success messages
+### 4. **Real Payment Flow**
+- **Offline Pay Modal**: Generate QR codes for offline payments
+- **RelayScan Processing**: Process payments through relay service
+- **Toast Notifications**: Shows success messages for real transactions
 
 ## 🧪 **How to Test**
 
 Your app is running at **http://localhost:8081/** - test the payment notifications:
 
-### **Method 1: Simulate Payment (Easiest)**
-1. **Go to Generate page**: Click "Generate" in header
-2. **Click "Simulate Payment Received"** button
-3. **See notification**: Green notification appears bottom-right
-4. **Test interactions**: Copy transaction hash, close notification
-
-### **Method 2: Real Payment Flow**
+### **Real Payment Flow**
 1. **Go to Generate page**: Click "Generate" in header
 2. **Click "Pay Offline"** button
 3. **Generate QR code** with payment details
@@ -128,9 +122,9 @@ The payment notification feature is now **fully functional** with:
 ## 🎉 **Test It Now**
 
 1. **Navigate to Generate page**: http://localhost:8081/generate
-2. **Click "Simulate Payment Received"** to test notifications
-3. **See the beautiful notification** appear bottom-right
-4. **Test the interactive elements** (copy, close)
+2. **Click "Pay Offline"** to generate a QR code
+3. **Go to RelayScan page** and process the payment
+4. **See the payment notification** appear (if implemented)
 5. **Try the real flow** with RelayScan page
 
 The payment notification system is now **production-ready** and provides excellent user feedback! 🎉

@@ -18,8 +18,8 @@ export const ProfileSchema = z.object({
   wallet: z.string().regex(/^0x[a-fA-F0-9]{40}$/, "Invalid wallet address"),
   displayName: z.string().min(1).max(64),
   bio: z.string().max(512).optional(),
-  organization: z.string().max(128).optional(),
-  role: z.string().max(64).optional(),
+  aadhar: z.string().regex(/^\d{4}-\d{4}-\d{4}$/, "Aadhar must be in format 1234-5678-9012").optional(),
+  pan: z.string().regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format").optional(),
   email: z.string().email().optional(),
   avatar: AvatarSchema.optional(),
   links: z.array(LinkSchema).max(10).optional(),
@@ -31,8 +31,12 @@ export const ProfileSchema = z.object({
 export const ProfileFormSchema = z.object({
   displayName: z.string().min(1, "Display name is required").max(64, "Display name too long"),
   bio: z.string().max(512, "Bio too long").optional(),
-  organization: z.string().max(128, "Organization name too long").optional(),
-  role: z.string().max(64, "Role too long").optional(),
+  aadhar: z.string().refine((val) => {
+    if (!val || val === "") return true; // Allow empty
+    // Allow partial formats while typing: 1234-, 1234-5678-, 1234-5678-9012
+    return /^\d{4}(-\d{4}(-\d{4})?)?$/.test(val);
+  }, "Aadhar must be in format 1234-5678-9012").optional().or(z.literal("")),
+  pan: z.string().regex(/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/, "Invalid PAN format (e.g., ABCDE1234F)").optional().or(z.literal("")),
   email: z.string().email("Invalid email").optional().or(z.literal("")),
   links: z.array(LinkSchema).max(10, "Too many links").optional(),
 });
@@ -69,8 +73,8 @@ export function createEmptyProfile(wallet: string): Profile {
     wallet,
     displayName: "",
     bio: "",
-    organization: "",
-    role: "",
+    aadhar: "",
+    pan: "",
     email: "",
     avatar: {},
     links: [],
@@ -79,11 +83,16 @@ export function createEmptyProfile(wallet: string): Profile {
 }
 
 export function sanitizeProfileInput(input: any): Partial<Profile> {
+  // Clean Aadhar number - remove dashes and keep only digits
+  const aadharValue = input.aadhar?.trim() || '';
+  const cleanAadhar = aadharValue.replace(/\D/g, '');
+  const finalAadhar = cleanAadhar.length === 12 ? cleanAadhar : '';
+  
   return {
     displayName: input.displayName?.trim(),
     bio: input.bio?.trim(),
-    organization: input.organization?.trim(),
-    role: input.role?.trim(),
+    aadhar: finalAadhar, // Store only digits or empty string
+    pan: input.pan?.trim().toUpperCase(),
     email: input.email?.trim(),
     links: input.links?.filter((link: any) => 
       link.label?.trim() && link.url?.trim()

@@ -3,7 +3,7 @@
 import { Transaction, StoredTransaction } from '../types';
 import { encryptData, decryptData } from './crypto';
 
-const STORAGE_KEY = 'qr_secure_sync_transactions';
+const STORAGE_KEY = 'olink_transactions';
 const SECRET_KEY = 'demo_secret_key'; 
 
 

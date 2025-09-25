@@ -60,7 +60,7 @@ const Index = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
           >
-            QR Secure Sync
+            O'LINK
           </motion.h1>
           
           <motion.p

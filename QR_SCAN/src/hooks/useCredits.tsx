@@ -4,7 +4,7 @@ import { UserCredit, CreditHistory, Transaction } from '@/types';
 import { useUser } from '@clerk/clerk-react';
 import { toast } from '@/components/ui/use-toast';
 
-const CREDITS_STORAGE_KEY = 'qr_secure_sync_credits';
+const CREDITS_STORAGE_KEY = 'olink_credits';
 
 export const useCredits = () => {
   const { user } = useUser();

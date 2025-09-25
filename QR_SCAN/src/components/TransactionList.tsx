@@ -5,6 +5,7 @@ import { getTransactions } from '../utils/storage';
 import { syncTransactionToBlockchain } from '../utils/blockchain';
 import { getNetworkState } from '../utils/network';
 import { useCredits } from '@/hooks/useCredits';
+import InvoiceModal from './InvoiceModal';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
@@ -15,13 +16,16 @@ import {
   ArrowDownUp,
   Clock,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  FileText
 } from 'lucide-react';
 
 const TransactionList: React.FC = () => {
   const [transactions, setTransactions] = useState<StoredTransaction[]>([]);
   const [isSyncing, setIsSyncing] = useState<boolean>(false);
   const [isOnline, setIsOnline] = useState<boolean>(getNetworkState().isOnline);
+  const [selectedTransaction, setSelectedTransaction] = useState<Transaction | null>(null);
+  const [isInvoiceModalOpen, setIsInvoiceModalOpen] = useState<boolean>(false);
   const { updateCredits } = useCredits();
   
   useEffect(() => {
@@ -129,6 +133,16 @@ const TransactionList: React.FC = () => {
       minute: '2-digit'
     });
   };
+
+  const handleCreateInvoice = (transaction: Transaction) => {
+    setSelectedTransaction(transaction);
+    setIsInvoiceModalOpen(true);
+  };
+
+  const handleCloseInvoiceModal = () => {
+    setIsInvoiceModalOpen(false);
+    setSelectedTransaction(null);
+  };
   
   return (
     <div className="w-full max-w-3xl mx-auto">
@@ -202,17 +216,17 @@ const TransactionList: React.FC = () => {
                     <div className="flex justify-between items-start">
                       <div>
                         <div className="font-medium">
-                          {transaction.amount.toFixed(2)}
+                          ${transaction.amount.toFixed(2)}
                         </div>
                         <div className="text-xs text-muted-foreground">
                           ID: {transaction.id.substring(0, 8)}...
                         </div>
                       </div>
                       
-                      <div className="flex flex-col items-end">
+                      <div className="flex flex-col items-end gap-2">
                         <Badge 
                           variant={transaction.status === 'verified' ? "default" : "outline"}
-                          className="flex items-center mb-2"
+                          className="flex items-center"
                         >
                           {getStatusIcon(transaction.status)}
                           <span className="ml-1">{getStatusText(transaction.status)}</span>
@@ -240,6 +254,18 @@ const TransactionList: React.FC = () => {
                         <div className="text-sm">{transaction.description}</div>
                       </div>
                     )}
+                    
+                    <div className="mt-4 pt-3 border-t border-border/60">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleCreateInvoice(transaction)}
+                        className="w-full"
+                      >
+                        <FileText className="h-4 w-4 mr-2" />
+                        Create Invoice
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -247,6 +273,16 @@ const TransactionList: React.FC = () => {
           </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* Invoice Modal */}
+      {selectedTransaction && (
+        <InvoiceModal
+          isOpen={isInvoiceModalOpen}
+          onClose={handleCloseInvoiceModal}
+          transaction={selectedTransaction}
+          userAddress={selectedTransaction.sender}
+        />
+      )}
     </div>
   );
 };

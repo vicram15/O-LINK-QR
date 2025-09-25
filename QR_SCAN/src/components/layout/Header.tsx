@@ -58,10 +58,10 @@ const Header: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">QS</span>
+              <span className="text-white font-bold">O</span>
             </div>
           </motion.div>
-          <span>QR Secure Sync</span>
+          <span>O'LINK</span>
         </Link>
         
         {/* Desktop Navigation */}

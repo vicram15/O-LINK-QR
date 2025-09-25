@@ -146,20 +146,6 @@ const RelayScan: React.FC = () => {
       const resultData = await response.json();
       setResult(resultData);
       
-      // Trigger payment completion event for Generate page
-      const paymentEvent = new CustomEvent('paymentComplete', {
-        detail: {
-          payment: {
-            id: resultData.txHash,
-            amount: parseFloat(scannedData.request.value) / 1e18, // Convert wei to ETH
-            recipient: scannedData.request.to,
-            status: 'completed',
-            timestamp: Date.now(),
-            txHash: resultData.txHash,
-          }
-        }
-      });
-      window.dispatchEvent(paymentEvent);
       
       toast({
         title: 'Payment Processed',

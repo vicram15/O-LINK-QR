@@ -21,13 +21,6 @@ async function main() {
   const recipientAddress = await recipient.getAddress();
   console.log("Recipient deployed to:", recipientAddress);
 
-  // Deploy ProfileSBT
-  const ProfileSBT = await ethers.getContractFactory("ProfileSBT");
-  const profileSBT = await ProfileSBT.deploy(forwarderAddress);
-  await profileSBT.waitForDeployment();
-  
-  const profileSBTAddress = await profileSBT.getAddress();
-  console.log("ProfileSBT deployed to:", profileSBTAddress);
 
   // Get network info
   const network = await ethers.provider.getNetwork();
@@ -38,7 +31,6 @@ async function main() {
     chainId,
     forwarder: forwarderAddress,
     recipient: recipientAddress,
-    profileSBT: profileSBTAddress,
     deployedAt: new Date().toISOString(),
   };
 
@@ -88,24 +80,11 @@ async function main() {
   );
   console.log("AppForwarder ABI copied to:", path.join(abiDir, "AppForwarder.json"));
 
-  // Copy ProfileSBT ABI
-  const profileSBTArtifact = JSON.parse(
-    fs.readFileSync(
-      path.join(artifactsDir, "ProfileSBT.sol/ProfileSBT.json"),
-      "utf8"
-    )
-  );
-  fs.writeFileSync(
-    path.join(abiDir, "ProfileSBT.json"),
-    JSON.stringify(profileSBTArtifact.abi, null, 2)
-  );
-  console.log("ProfileSBT ABI copied to:", path.join(abiDir, "ProfileSBT.json"));
 
   console.log("\nDeployment completed successfully!");
   console.log("Network:", network.name, "(Chain ID:", chainId, ")");
   console.log("Forwarder:", forwarderAddress);
   console.log("Recipient:", recipientAddress);
-  console.log("ProfileSBT:", profileSBTAddress);
 }
 
 main()
